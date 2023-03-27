@@ -78,10 +78,8 @@ let clearInput = document.getElementById('clearInput');
 textIn.addEventListener('keyup',(e)=>{
   let text = e.target.value;
 
-  if(text !== ""){
-    quertyOut.value = convertDvorak(text);
-    dvorakOut.value = convertQuerty(text);
-  }
+  quertyOut.value = convertDvorak(text);
+  dvorakOut.value = convertQuerty(text);
 });
 
 clearInput.addEventListener('click', (e)=>{{e.preventDefault(); textIn.value = ""; quertyOut.value = ""; dvorakOut.value = ""; return false;}});
