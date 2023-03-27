@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Dvorky</title>
+    <style>
+body {
+  font-family: "Helvetica", sans-serif;
+  background-color: #24395D;
+  color: #4EE6FF;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+main {
+  margin: 1em auto;
+  width: 80%;
+}
+
+label {
+  display: block;
+}
+
+input,
+textarea {
+  width: 100%;
+}
+
+textarea {
+  height: 5em;
+}
+
+.output {
+  margin-bottom: 1.5em;
+}
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Dvorky</h1>
+      <p>
+      A simple utility to convert Querty to Dvorak, and Dvorak to Querty for en-us input.
+      </p>
+      <form>
+        <div class="output">
+          <label for="textInput" >Text input to convert</label>
+          <textarea placeholder="Words to convert" id="textInput"></textarea>
+        </div>
+
+        <div class="output">
+          <label for="quertyOutput">Querty</label>
+          <textarea id="quertyOutput"></textarea>
+          <button id="copyQ">Copy</button>
+        </div>
+
+        <div class="output">
+          <label for="dvorakOutput">Dvorak</label>
+          <textarea id="dvorakOutput"></textarea>
+          <button id="copyD">Copy</button>          
+        </div>
+      </form>
+    </main>
+	<script src="index.js">
+let dvorak = " []{}'\",<.>pPyYfFgGcCrRlL/?=+\|aAoOeEuUiIdDhHtTnNsS-_;:qQjJkKxXbBmMwWvVzZ";
+let querty = " -=_+qQwWeErRtTyYuUiIoOpP[{]}\|aAsSdDfFgGhHjJkKlL;:'\"zZxXcCvVbBnNmM,<.>/?";
+let textIn = document.getElementById('textInput');
+let quertyOut = document.getElementById('quertyOutput');
+let dvorakOut = document.getElementById('dvorakOutput');
+let copyQ = document.getElementById('copyQ');
+let copyD = document.getElementById('copyD');
+
+textIn.addEventListener('keyup',(e)=>{
+  let text = e.target.value;
+
+  if(text !== ""){
+    quertyOut.value = convertDvorak(text);
+    dvorakOut.value = convertQuerty(text);
+  }
+});
+
+copyQ.addEventListener('click', (e) => {e.preventDefault(); copy(quertyOut.value); return false;});
+copyD.addEventListener('click', (e) => {e.preventDefault(); copy(dvorakOut.value); return false;});
+
+function convertDvorak(input){
+  // from dvorak to querty
+  return input.split('').reduce((p,n) => { let index = dvorak.indexOf(n); return p + (index > -1 ? querty[index] : n) },'');
+}
+
+function convertQuerty(input){
+  // from dvorak to querty
+  return input.split('').reduce((p,n) => { let index = querty.indexOf(n); return p + (index > -1 ? dvorak[index] : n) },'');
+}
+
+function copy(text){
+	  navigator.clipboard.writeText(text).then(
+    () => {
+      console.log("Copied the text to the clipboard.");
+    },
+    () => {
+      console.error("Could not copy the text to the clipboard");
+    }
+  );
+}
+  </script>
+  </body>
+</html>
