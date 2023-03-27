@@ -48,6 +48,7 @@ textarea {
         <div class="output">
           <label for="textInput" >Text input to convert</label>
           <textarea placeholder="Words to convert" id="textInput"></textarea>
+	  <button id="clearInput">Clear</button>
         </div>
 
         <div class="output">
@@ -71,6 +72,7 @@ let quertyOut = document.getElementById('quertyOutput');
 let dvorakOut = document.getElementById('dvorakOutput');
 let copyQ = document.getElementById('copyQ');
 let copyD = document.getElementById('copyD');
+let clearInput = document.getElementById('clearInput');
 
 textIn.addEventListener('keyup',(e)=>{
   let text = e.target.value;
@@ -81,6 +83,7 @@ textIn.addEventListener('keyup',(e)=>{
   }
 });
 
+clearInput.addEventListener('click', (e)=>{{e.preventDefault(); textIn.value = ""; return false;}});
 copyQ.addEventListener('click', (e) => {e.preventDefault(); copy(quertyOut.value); return false;});
 copyD.addEventListener('click', (e) => {e.preventDefault(); copy(dvorakOut.value); return false;});
 
