@@ -83,7 +83,7 @@ textIn.addEventListener('keyup',(e)=>{
   }
 });
 
-clearInput.addEventListener('click', (e)=>{{e.preventDefault(); textIn.value = ""; return false;}});
+clearInput.addEventListener('click', (e)=>{{e.preventDefault(); textIn.value = ""; quertyOut.value = ""; dvorakOut.value = ""; return false;}});
 copyQ.addEventListener('click', (e) => {e.preventDefault(); copy(quertyOut.value); return false;});
 copyD.addEventListener('click', (e) => {e.preventDefault(); copy(dvorakOut.value); return false;});
 
